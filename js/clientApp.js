@@ -14,7 +14,7 @@ var MyTitle = React.createClass({
 var MyTitleFact = React.createFactory(MyTitle)
 
 	var MyFirstComponent = (
-		div(null, MyTitleFact({title: "Props are great!", color: "mediumaquamarine"})
+		div(null, MyTitleFact({title: "Props are great!", color: "papayawhip"})
 			)
 		)
 
