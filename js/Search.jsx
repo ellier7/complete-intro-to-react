@@ -4,10 +4,10 @@ const data = require('../public/data')
 
 const Search = () => (
   <div className='container'>
-  <header className='header'>
-  <h1 className='brand'>svideo</h1>
-  <input className='search-input' type='text' placeholder='Search' />
-  </header>
+    <header className='header'>
+      <h1 className='brand'>svideo</h1>
+      <input className='search-input' type='text' placeholder='Search' />
+    </header>
     <div className='shows'>
       {
     data.shows.map((show) => (
