@@ -24,7 +24,11 @@ const Search = React.createClass({
             // dynamically search for show they are looking for
               // / can search for title or description
     data.shows
-    .filter((show) => `${show.title} ${show.description}`.toUpperCase().indexOf(this.state.searchTerm.toUpperCase()) >= 0)
+    .filter((show) => {
+      return `${show.title} ${show.description}`
+      .toUpperCase()
+      .indexOf(this.state.searchTerm.toUpperCase()) >= 0
+    })
     .map((show) => (
       <ShowCard
         {...show} // instead of passing everything individually
