@@ -22,7 +22,7 @@ const Search = React.createClass({
         <div className='shows'>
           {
             // dynamically search for show they are looking for
-              // / can search for title or description
+              // can search for title or description
     data.shows
     .filter((show) => {
       return `${show.title} ${show.description}`
