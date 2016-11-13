@@ -1,5 +1,6 @@
 const React = require('react')
 const ShowCard = require('./ShowCard')
+const Header = require('./Header')
 const { object } = React.PropTypes
 
 const Search = React.createClass({
@@ -12,16 +13,18 @@ const Search = React.createClass({
     route: object
   },
   // must handle your own events
-  handleSearchTermEvent (event) {
-    this.setState({searchTerm: event.target.value})
+    // to be more resuable, handle event in header
+  handleSearchTermChange (searchTerm) {
+    this.setState({ searchTerm })
   },
   render () {
     return (
       <div className='container'>
-        <header className='header'>
-          <h1 className='brand'>svideo</h1>
-          <input value={this.state.searchTerm} className='search-input' type='text' placeholder='Search' onChange={this.handleSearchTermEvent} />
-        </header>
+        <Header
+          handleSearchTermChange={this.handleSearchTermChange}
+          searchTerm={this.state.searchTerm}
+          showSearch
+      />
         <div className='shows'>
           {
             // dynamically search for show they are looking for
