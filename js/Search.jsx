@@ -1,13 +1,13 @@
 const React = require('react')
 const ShowCard = require('./ShowCard')
 const Header = require('./Header')
-const { object, string } = React.PropTypes
+const { arrayOf, object, string } = React.PropTypes
 const { connector } = require('./Store')
 
 // can change to stateless component now
 const Search = React.createClass({
   propTypes: {
-    route: object,
+    shows: arrayOf(object),
     searchTerm: string
   },
   render () {
@@ -18,7 +18,7 @@ const Search = React.createClass({
           {
             // dynamically search for show they are looking for
               // can search for title or description
-    this.props.route.shows
+    this.props.shows
     .filter((show) => {
       return `${show.title} ${show.description}`
       .toUpperCase()
