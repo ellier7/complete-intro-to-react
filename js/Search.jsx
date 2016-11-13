@@ -1,30 +1,19 @@
 const React = require('react')
 const ShowCard = require('./ShowCard')
 const Header = require('./Header')
-const { object } = React.PropTypes
+const { object, string } = React.PropTypes
+const { connector } = require('./Store')
 
+// can change to stateless component now
 const Search = React.createClass({
-  getInitialState () {
-    return {
-      searchTerm: ''
-    }
-  },
   propTypes: {
-    route: object
-  },
-  // must handle your own events
-    // to be more resuable, handle event in header
-  handleSearchTermChange (searchTerm) {
-    this.setState({ searchTerm })
+    route: object,
+    searchTerm: string
   },
   render () {
     return (
       <div className='container'>
-        <Header
-          handleSearchTermChange={this.handleSearchTermChange}
-          searchTerm={this.state.searchTerm}
-          showSearch
-      />
+        <Header showSearch />
         <div className='shows'>
           {
             // dynamically search for show they are looking for
@@ -33,7 +22,7 @@ const Search = React.createClass({
     .filter((show) => {
       return `${show.title} ${show.description}`
       .toUpperCase()
-      .indexOf(this.state.searchTerm.toUpperCase()) >= 0
+      .indexOf(this.props.searchTerm.toUpperCase()) >= 0
     })
     .map((show) => (
       <ShowCard
@@ -47,4 +36,4 @@ const Search = React.createClass({
   }
 })
 
-module.exports = Search
+module.exports = connector(Search)

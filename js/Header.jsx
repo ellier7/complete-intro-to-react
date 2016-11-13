@@ -1,15 +1,17 @@
 const React = require('react')
 const { Link } = require('react-router')
 const { func, bool, string } = React.PropTypes
+const { connector } = require('./Store')
 
 const Header = React.createClass({
   propTypes: {
-    handleSearchTermChange: func,
+    setSearchTerm: func,
     showSearch: bool,
     searchTerm: string
   },
+  // child calling parent
   handleSearchTermEvent (event) {
-    this.props.handleSearchTermChange(event.target.value)
+    this.props.setSearchTerm(event.target.value) // from store
   },
   render () {
     let utilSpace
@@ -33,4 +35,6 @@ const Header = React.createClass({
   }
 })
 
-module.exports = Header
+// connect to redux store
+  // injects to component
+module.exports = connector(Header)
