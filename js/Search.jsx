@@ -1,12 +1,15 @@
 const React = require('react')
 const ShowCard = require('./ShowCard')
-const data = require('../public/data')
+const { object } = React.PropTypes
 
 const Search = React.createClass({
   getInitialState () {
     return {
       searchTerm: ''
     }
+  },
+  propTypes: {
+    route: object
   },
   // must handle your own events
   handleSearchTermEvent (event) {
@@ -23,7 +26,7 @@ const Search = React.createClass({
           {
             // dynamically search for show they are looking for
               // can search for title or description
-    data.shows
+    this.props.route.shows
     .filter((show) => {
       return `${show.title} ${show.description}`
       .toUpperCase()

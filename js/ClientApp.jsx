@@ -3,18 +3,30 @@ const ReactDOM = require('react-dom')
 const Landing = require('./Landing')
 const Search = require('./Search')
 const Layout = require('./Layout')
-const {Router, Route, hashHistory, IndexRoute} = require('react-router')
+const Details = require('./Details')
+const { Router, Route, IndexRoute, hashHistory } = require('react-router')
+const { shows } = require('../public/data')
 
-// stateless component (just a function)
-  // can use function express since youre only returning divs
-  // use return if you want conditionals and variables
-const App = () => (
-  <Router history={hashHistory}>
-    <Route path='/' component={Layout} > {/* nested route for layout backgorund */}
-      <IndexRoute component={Landing} /> {/* one index route only; landing is children to layout */}
-      <Route path='/search' component={Search} /> {/* then passes search as children */}
-    </Route>
-  </Router>
-)
+const App = React.createClass({
+  assignShow (nextState, replace) {
+    const showArray = shows.filter((show) => show.imdbID === nextState.params.id)
+    if (showArray.length < 1) {
+      return replace('/')
+    }
+    Object.assign(nextState.params, showArray[0]) // take items in array and put them in nextstate.params
+    return nextState
+  },
+  render () {
+    return (
+      <Router history={hashHistory}>
+        <Route path='/' component={Layout}>
+          <IndexRoute component={Landing} />
+          <Route path='/search' component={Search} shows={shows} />
+          <Route path='/details/:id' component={Details} onEnter={this.assignShow} />
+        </Route>
+      </Router>
+  )
+  }
+})
 
 ReactDOM.render(<App />, document.getElementById('app'))
