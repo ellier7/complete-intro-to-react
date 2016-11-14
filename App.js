@@ -8,13 +8,13 @@ const match = ReactRouter.match
 const RouterContext = ReactRouter.RouterContext
 const ReactRedux = require('react-redux')
 const Provider = ReactRedux.Provider
-const Store = require('./js/Store.jsx') // must specify .jsx because its not in webpack
+const Store = require('./js/Store.jsx')
 const store = Store.store
 const _ = require('lodash')
 const fs = require('fs')
 const port = 5050
 const baseTemplate = fs.readFileSync('./index.html')
-const template = _.template(baseTemplate) // new function that creates new string using template; function that returns function
+const template = _.template(baseTemplate)
 const ClientApp = require('./js/ClientApp.jsx')
 const Routes = ClientApp.Routes
 
@@ -23,7 +23,7 @@ const app = express()
 app.use('/public', express.static('./public'))
 
 app.use((req, res) => {
-  match({ routes: Routes(), location: req.url }, (error, redirectLocation, renderProps) => {
+  match({ routes: Routes, location: req.url }, (error, redirectLocation, renderProps) => {
     if (error) {
       res.status(500).send(error.message)
     } else if (redirectLocation) {
@@ -43,4 +43,3 @@ app.use((req, res) => {
 
 console.log('listening on port ' + port)
 app.listen(port)
-

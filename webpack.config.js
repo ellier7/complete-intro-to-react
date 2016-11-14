@@ -5,7 +5,8 @@ module.exports = {
   entry: './js/BrowserEntry.jsx',
   output: {
     path: path.join(__dirname, '/public'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: '/public/'
   },
   resolve: {
     extensions: ['', '.js', '.jsx', '.json']
@@ -13,13 +14,13 @@ module.exports = {
   stats: {
     colors: true,
     reasons: true,
-    chunks: false
+    chunks: true
   },
   module: {
     preLoaders: [
       {
         test: /\.jsx?$/,
-        loader: 'eslint-loader',
+        loader: "eslint-loader",
         exclude: /node_modules/
       }
     ],
